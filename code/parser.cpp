@@ -5,7 +5,7 @@ using namespace std;
 
 int fsm() {
     //initialize the reader
-    ifstream file("bitstream.txt");
+    ifstream file("../res/bitstream.txt");
     if (!file) {return 3;}
 
     int state = 0;
