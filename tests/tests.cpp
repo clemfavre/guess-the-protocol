@@ -4,28 +4,49 @@
 #include <iostream>
 
 
-TEST(parserTest, parseOneSimpleChar) {
+TEST(parserTest, oneSimpleChar) {
     // Capture stdout
     testing::internal::CaptureStdout();
-
     //call function to test
-    int error = fsm("../res/test.txt");
-
+    int error = fsm("../res/oneSimpleChar.txt");
     //print error
     std::cout << error;
-    
     // Get the captured output
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "a0");
 }
 
+TEST(parserTest, oneSimpleCharStartingWithOnes) {
+    testing::internal::CaptureStdout();
+    int error = fsm("../res/oneSimpleCharStartingWithOnes.txt");
+    std::cout << error;
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "a0");
+}
 
+TEST(parserTest, severalGluedChar) {
+    testing::internal::CaptureStdout();
+    int error = fsm("../res/severalGluedChar.txt");
+    std::cout << error;
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "abc0");
+}
 
+TEST(parserTest, severalNonGluedChar) {
+    testing::internal::CaptureStdout();
+    int error = fsm("../res/severalNonGluedChar.txt");
+    std::cout << error;
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "abc0");
+}
 
-
-
-
-
+TEST(parserTest, hiddenMessage) {
+    testing::internal::CaptureStdout();
+    int error = fsm("../res/bitstream.txt");
+    std::cout << error;
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "Welcome to the Team0");
+}
 
 
 
