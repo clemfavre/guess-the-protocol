@@ -3,6 +3,16 @@
 #include "../code/parser.cpp"
 #include <iostream>
 
+/*
+ERROR TABLE
+    0 --> no error
+    1 --> error : other char than '0' or '1' found in the bitstream
+    3 --> error : can not find/open the file.txt
+    4 --> error : EOF while reading a char
+    5 --> error : other char than '0' or '1' found while reading a char (TO DO)
+    6 --> error : other char than '0' just after reading a char (TO DO)
+*/
+
 //return value of fsm() == 0 --> no error
 TEST(parserTest, oneSimpleChar) {
     // Capture stdout
