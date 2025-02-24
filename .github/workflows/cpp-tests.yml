@@ -26,7 +26,7 @@ jobs:
       # Build the project (e.g., using CMake)
       - name: Build project
         run: |
-          mkdir build
+          #mkdir build
           cd build
           cmake ..
           make
