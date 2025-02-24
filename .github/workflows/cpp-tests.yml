@@ -1,0 +1,40 @@
+name: C++ Tests
+
+on:
+  push:
+    branches:
+      - main  # Trigger on pushes to the main branch
+  pull_request:
+    branches:
+      - main  # Trigger on pull requests to the main branch
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu environment
+
+    steps:
+      # Check out the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up a C++ environment (e.g., install dependencies)
+      - name: Set up environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake
+
+      # Build the project (e.g., using CMake)
+      - name: Build project
+        run: |
+          mkdir build
+          cd build
+          cmake ..
+          make
+
+      # Run the tests
+      - name: Run tests
+        run: |
+          cd build
+          #ctest --output-on-failure  # If using CMake with CTest
+          # Or, if you have a custom test executable:
+          ./my_tests
