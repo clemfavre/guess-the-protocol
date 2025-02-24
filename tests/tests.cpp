@@ -9,7 +9,7 @@ TEST(parserTest, parseOneSimpleChar) {
     testing::internal::CaptureStdout();
 
     //call function to test
-    int error = fsm();
+    int error = fsm("../res/test.txt");
 
     //print error
     std::cout << error;

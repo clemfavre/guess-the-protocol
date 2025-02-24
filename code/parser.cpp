@@ -4,9 +4,9 @@
 #include "parser.h"
 using namespace std;
 
-int fsm() {
+int fsm(std::string path) {
     //initialize the reader
-    ifstream file("../res/test.txt");
+    ifstream file(path);
     if (!file) {return 3;}
 
     int state = 0;

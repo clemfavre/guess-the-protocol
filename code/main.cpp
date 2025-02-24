@@ -5,9 +5,9 @@ using namespace std;
 
 
 
-int main() {
+int main(std::string path) {
     cout << "program started" << endl;
-    int error = fsm();
+    int error = fsm(path);
     cout << "" << endl;
     if (error) {cout << "an error occured : ";
       cout << error;
