@@ -1,11 +1,12 @@
 #include <bitset>
 #include <fstream>
 #include <iostream>
+#include "parser.h"
 using namespace std;
 
 int fsm() {
     //initialize the reader
-    ifstream file("../res/bitstream.txt");
+    ifstream file("../res/test.txt");
     if (!file) {return 3;}
 
     int state = 0;
