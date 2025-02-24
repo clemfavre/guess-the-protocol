@@ -5,7 +5,8 @@ using namespace std;
 
 
 
-int main(std::string path) {
+int main() {
+    string path = "../res/bitstream.txt";
     cout << "program started" << endl;
     int error = fsm(path);
     cout << "" << endl;
