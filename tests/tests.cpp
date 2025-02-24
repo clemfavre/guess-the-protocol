@@ -3,7 +3,7 @@
 #include "../code/parser.cpp"
 #include <iostream>
 
-
+//return value of fsm() == 0 --> no error
 TEST(parserTest, oneSimpleChar) {
     // Capture stdout
     testing::internal::CaptureStdout();
@@ -47,6 +47,63 @@ TEST(parserTest, hiddenMessage) {
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "Welcome to the Team0");
 }
+
+//return value of fsm() == 1 --> ERROR : other char than '0' or '1' found
+TEST(parserTest, CharAInTheBitsequenceReturn1) {
+    testing::internal::CaptureStdout();
+    int error = fsm("../res/CharAInTheBitsequenceReturn1.txt");
+    std::cout << error;
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "1");
+}
+
+TEST(parserTest, CharAInTheBitsequenceAfterSeveralGluedCharReturn1) {
+    testing::internal::CaptureStdout();
+    int error = fsm("../res/CharAInTheBitsequenceAfterSeveralGluedCharReturn1.txt");
+    std::cout << error;
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "abc1");
+}
+
+//return value of fsm() == 3 --> ERROR : can not find/open the file.txt
+TEST(parserTest, InexistingFile) {
+    testing::internal::CaptureStdout();
+    int error = fsm("../res/InexistingFile.txt");
+    std::cout << error;
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "3");
+}
+
+//return value of fsm() == 4 --> ERROR : EOF while reading a char
+TEST(parserTest, EOFWhileReadingCharMiddle) {
+    testing::internal::CaptureStdout();
+    int error = fsm("../res/EOFWhileReadingChar.txt");
+    std::cout << error;
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "4");
+}
+
+TEST(parserTest, EOFWhileReadingCharBegining) {
+    testing::internal::CaptureStdout();
+    int error = fsm("../res/EOFWhileReadingCharBegining.txt");
+    std::cout << error;
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "4");
+}
+
+TEST(parserTest, EOFWhileReadingCharEnd) {
+    testing::internal::CaptureStdout();
+    int error = fsm("../res/EOFWhileReadingCharEnd.txt");
+    std::cout << error;
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "4");
+}
+
+
+
+
+
+
 
 
 
