@@ -11,3 +11,11 @@ FetchContent_Declare(
   URL https://github.com/google/googletest/archive/refs/heads/main.zip
 )
 FetchContent_MakeAvailable(googletest)
+
+# Add your test executable
+add_executable(my_tests tests.cpp)
+target_link_libraries(my_tests gtest_main)
+
+# Add the test
+enable_testing()
+add_test(NAME my_tests COMMAND my_tests)
