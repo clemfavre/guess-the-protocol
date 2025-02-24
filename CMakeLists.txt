@@ -12,6 +12,9 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(googletest)
 
+# Add your source files
+set(SOURCES code/parser.cpp)
+
 # Add your test executable
 add_executable(my_tests tests/tests.cpp)
 target_link_libraries(my_tests gtest_main)
