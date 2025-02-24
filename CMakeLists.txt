@@ -3,7 +3,7 @@ project(MyParser)  # Name your project
 
 set(CMAKE_CXX_STANDARD 17)  # Set C++ standard
 
-add_executable(parser code/parser.cpp)  # Add your source file
+add_executable(parser code/main.cpp code/parser.cpp)  # Add your source file
 
 include(FetchContent)
 FetchContent_Declare(

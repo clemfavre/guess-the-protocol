@@ -43,13 +43,3 @@ int fsm() {
       file.close();
       return 0;
 }
-
-int main() {
-    cout << "program started" << endl;
-    int error = fsm();
-    cout << "" << endl;
-    if (error) {cout << "an error occured : ";
-      cout << error;
-    }
-    return error;
-}
