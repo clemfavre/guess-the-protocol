@@ -1,4 +1,33 @@
 #include <gtest/gtest.h>
+#include "../code/parser.h"
+#include "../code/parser.cpp"
+#include <iostream>
+
+
+TEST(parserTest, parseOneSimpleChar) {
+    // Capture stdout
+    testing::internal::CaptureStdout();
+
+    //call function to test
+    int error = fsm();
+
+    //print error
+    std::cout << error;
+    
+    // Get the captured output
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "a0");
+}
+
+
+
+
+
+
+
+
+
+
 
 // Function to test
 int add(int a, int b) {
