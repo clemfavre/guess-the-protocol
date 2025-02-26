@@ -9,8 +9,8 @@ ERROR TABLE
     1 --> error : other char than '0' or '1' found in the bitstream
     3 --> error : can not find/open the file.txt
     4 --> error : EOF while reading a char
-    5 --> error : other char than '0' or '1' found while reading a char (TO DO)
-    6 --> error : other char than '0' just after reading a char (TO DO)
+    5 --> error : other char than '0' or '1' found while reading a char
+    6 --> error : other char than '0' just after reading a char
 */
 
 //return value of fsm() == 0 --> no error
@@ -109,10 +109,31 @@ TEST(parserTest, EOFWhileReadingCharEnd) {
     EXPECT_EQ(output, "4");
 }
 
+//return value of fsm() == 5 --> ERROR : other char than '0' or '1' found while reading a char
+TEST(parserTest, CharAWhileReadingCharBegining) {
+    testing::internal::CaptureStdout();
+    int error = fsm("../res/CharAWhileReadingCharBegining.txt");
+    std::cout << error;
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "5");
+}
 
+TEST(parserTest, CharAWhileReadingCharMiddle) {
+    testing::internal::CaptureStdout();
+    int error = fsm("../res/CharAWhileReadingCharMiddle.txt");
+    std::cout << error;
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "5");
+}
 
-
-
+//return value of fsm() == 6 --> ERROR : other char than '0' just after reading a char
+TEST(parserTest, CharAWhileReadingCharEnd) {
+    testing::internal::CaptureStdout();
+    int error = fsm("../res/CharAWhileReadingCharEnd.txt");
+    std::cout << error;
+    std::string output = testing::internal::GetCapturedStdout();
+    EXPECT_EQ(output, "a6");
+}
 
 
 

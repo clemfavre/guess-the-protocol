@@ -35,7 +35,7 @@ int fsm(std::string path) {
           unsigned char byte = bits.to_ulong();
           finalChar = static_cast<char>(byte);
           cout << finalChar;
-          if (bit!='0') {return 7;}
+          if (bit!='0') {return 6;}
           state = 0;
           break;
         }
