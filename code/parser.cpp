@@ -4,27 +4,31 @@
 #include "parser.h"
 using namespace std;
 
+enum State{
+  waiting, reading
+};
+
 int fsm(std::string path) {
     //initialize the reader
     ifstream file(path);
     if (!file) {return 3;}
 
-    int state = 0;
+    State state = waiting;
     char bit;
     std::string binStr;
     char finalChar;
     while (file.get(bit)) {
       switch(state) {
-        case 0://waiting
+        case waiting:
           if (bit == '0') {
-              state = 1;
+              state = reading;
             } else if (bit == '1') {
-              state = 0;
+              state = waiting;
             } else {
               if (bit!='\n') {return 1;}
             }
           break;
-        case 1://reading
+        case reading:
           binStr.clear();
           for (int i=0; i<8; i++) {
             if (!(bit=='0' || bit=='1')) {return 5;}
@@ -36,7 +40,7 @@ int fsm(std::string path) {
           finalChar = static_cast<char>(byte);
           cout << finalChar;
           if (bit!='0') {return 6;}
-          state = 0;
+          state = waiting;
           break;
         }
       }
