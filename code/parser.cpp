@@ -25,25 +25,25 @@ int fsm(std::string path) {
             } else if (bit == '1') {
               state = waiting;
             } else {
-              if (bit!='\n') {return 1;}
+              if (bit!='\n') {file.close(); return 1;}
             }
           break;
         case reading:
           binStr.clear();
           for (int i=0; i<8; i++) {
-            if (!(bit=='0' || bit=='1')) {return 5;}
+            if (!(bit=='0' || bit=='1')) {file.close(); return 5;}
             binStr+=bit;
-            if (!file.get(bit)) {return 4;}
+            if (!file.get(bit)) {file.close(); return 4;}
           }
           std::bitset<8> bits(binStr);
           unsigned char byte = bits.to_ulong();
           finalChar = static_cast<char>(byte);
           cout << finalChar;
-          if (bit!='0') {return 6;}
+          if (bit!='0') {file.close(); return 6;}
           state = waiting;
           break;
-        }
       }
+    }
       file.close();
       return 0;
 }
