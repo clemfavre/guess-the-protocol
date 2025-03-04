@@ -2,5 +2,5 @@
 
 
 
-int fsm(std::string* path);
+int fsm(const std::string* path);
 
