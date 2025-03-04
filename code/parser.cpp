@@ -3,7 +3,7 @@
 #include <iostream>
 #include "parser.h"
 
-enum State{
+enum class State{
   waiting, reading
 };
 
@@ -12,22 +12,22 @@ int fsm(std::string path) {
     std::ifstream file(path);
     if (!file) {return 3;}
 
-    State state = waiting;
+    State state = State::waiting;
     char bit;
     std::string binStr;
     char finalChar;
     while (file.get(bit)) {
       switch(state) {
-        case waiting:
+        case State::waiting:
           if (bit == '0') {
-              state = reading;
+              state = State::reading;
             } else if (bit == '1') {
-              state = waiting;
+              state = State::waiting;
             } else {
               if (bit!='\n') {file.close(); return 1;}
             }
           break;
-        case reading:
+        case State::reading:
           binStr.clear();
           for (int i=0; i<8; i++) {
             if (!(bit=='0' || bit=='1')) {file.close(); return 5;}
@@ -39,7 +39,7 @@ int fsm(std::string path) {
           finalChar = static_cast<char>(byte);
           std::cout << finalChar;
           if (bit!='0') {file.close(); return 6;}
-          state = waiting;
+          state = State::waiting;
           break;
       }
     }
