@@ -23,34 +23,33 @@ int readOneByte(std::ifstream* filePtr, char* bitPtr, char* finalCharPtr, std::s
 }
 
 int fsm(std::string path) {
-    //initialize the reader
-    std::ifstream file(path);
-    if (!file) {return 3;}
+  //initialize the reader
+  std::ifstream file(path);
+  if (!file) {return 3;}
+  State state = State::waiting;
+  char bit;
+  std::string binStr;
+  char finalChar;
+  while (file.get(bit)) {
+    switch(state) {
+      case State::waiting:
 
-    State state = State::waiting;
-    char bit;
-    std::string binStr;
-    char finalChar;
-    while (file.get(bit)) {
-      switch(state) {
-        case State::waiting:
-
-          if (!(bit=='0' || bit=='1' || bit=='\n')) {
-            file.close(); return 1;
+        if (!(bit=='0' || bit=='1' || bit=='\n')) {
+          file.close(); return 1;
+        }
+        if (bit == '0') {
+            state = State::reading;
+          } else {
+            state = State::waiting;
           }
-          if (bit == '0') {
-              state = State::reading;
-            } else {
-              state = State::waiting;
-            }
-          break;
-        case State::reading:
-          int error = readOneByte(&file, &bit, &finalChar, &binStr);
-          if (error) {return error;}
-          state = State::waiting;
-          break;
-      }
+        break;
+      case State::reading:
+        int error = readOneByte(&file, &bit, &finalChar, &binStr);
+        if (error) {return error;}
+        state = State::waiting;
+        break;
     }
-      file.close();
-      return 0;
+  }
+    file.close();
+    return 0;
 }
