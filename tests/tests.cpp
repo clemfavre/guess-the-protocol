@@ -93,14 +93,6 @@ TEST(parserTest, EOFWhileReadingCharMiddle) {
     EXPECT_EQ(output, "4");
 }
 
-/*TEST(parserTest, EOFWhileReadingCharBegining) {
-    testing::internal::CaptureStdout();
-    int error = fsm("../res/EOFWhileReadingCharBegining.txt");
-    std::cout << error;
-    std::string output = testing::internal::GetCapturedStdout();
-    EXPECT_EQ(output, "4");
-}*/
-
 TEST(parserTest, EOFWhileReadingCharEnd) {
     testing::internal::CaptureStdout();
     int error = fsm("../res/EOFWhileReadingCharEnd.txt");
