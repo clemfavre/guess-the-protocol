@@ -22,7 +22,8 @@ int readOneByte(std::ifstream* filePtr, char* bitPtr, char* finalCharPtr) {
   return 0;
 }
 
-int fsm(std::string path) {
+int fsm(std::string* pathPtr) {
+  std::string path = *pathPtr;
   //initialize the reader
   std::ifstream file(path);
   if (!file) {return 3;}

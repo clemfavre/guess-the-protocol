@@ -17,8 +17,10 @@ ERROR TABLE
 TEST(parserTest, oneSimpleChar) {
     // Capture stdout
     testing::internal::CaptureStdout();
+
+    std::string path = "../res/oneSimpleChar.txt";
     //call function to test
-    int error = fsm("../res/oneSimpleChar.txt");
+    int error = fsm(&path);
     //print error
     std::cout << error;
     // Get the captured output
@@ -28,7 +30,8 @@ TEST(parserTest, oneSimpleChar) {
 
 TEST(parserTest, oneSimpleCharStartingWithOnes) {
     testing::internal::CaptureStdout();
-    int error = fsm("../res/oneSimpleCharStartingWithOnes.txt");
+    std::string path = "../res/oneSimpleCharStartingWithOnes.txt";
+    int error = fsm(&path);
     std::cout << error;
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "a0");
@@ -36,7 +39,8 @@ TEST(parserTest, oneSimpleCharStartingWithOnes) {
 
 TEST(parserTest, severalGluedChar) {
     testing::internal::CaptureStdout();
-    int error = fsm("../res/severalGluedChar.txt");
+    std::string path = "../res/severalGluedChar.txt";
+    int error = fsm(&path);
     std::cout << error;
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "abc0");
@@ -44,7 +48,8 @@ TEST(parserTest, severalGluedChar) {
 
 TEST(parserTest, severalNonGluedChar) {
     testing::internal::CaptureStdout();
-    int error = fsm("../res/severalNonGluedChar.txt");
+    std::string path = "../res/severalNonGluedChar.txt";
+    int error = fsm(&path);
     std::cout << error;
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "abc0");
@@ -52,7 +57,8 @@ TEST(parserTest, severalNonGluedChar) {
 
 TEST(parserTest, hiddenMessage) {
     testing::internal::CaptureStdout();
-    int error = fsm("../res/bitstream.txt");
+    std::string path = "../res/bitstream.txt";
+    int error = fsm(&path);
     std::cout << error;
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "Welcome to the Team0");
@@ -61,7 +67,8 @@ TEST(parserTest, hiddenMessage) {
 //return value of fsm() == 1 --> ERROR : other char than '0' or '1' found
 TEST(parserTest, CharAInTheBitsequenceReturn1) {
     testing::internal::CaptureStdout();
-    int error = fsm("../res/CharAInTheBitsequenceReturn1.txt");
+    std::string path = "../res/CharAInTheBitsequenceReturn1.txt";
+    int error = fsm(&path);
     std::cout << error;
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "1");
@@ -69,7 +76,8 @@ TEST(parserTest, CharAInTheBitsequenceReturn1) {
 
 TEST(parserTest, CharAInTheBitsequenceAfterSeveralGluedCharReturn1) {
     testing::internal::CaptureStdout();
-    int error = fsm("../res/CharAInTheBitsequenceAfterSeveralGluedCharReturn1.txt");
+    std::string path = "../res/CharAInTheBitsequenceAfterSeveralGluedCharReturn1.txt";
+    int error = fsm(&path);
     std::cout << error;
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "abc1");
@@ -78,7 +86,8 @@ TEST(parserTest, CharAInTheBitsequenceAfterSeveralGluedCharReturn1) {
 //return value of fsm() == 3 --> ERROR : can not find/open the file.txt
 TEST(parserTest, InexistingFile) {
     testing::internal::CaptureStdout();
-    int error = fsm("../res/InexistingFile.txt");
+    std::string path = "../res/InexistingFile.txt";
+    int error = fsm(&path);
     std::cout << error;
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "3");
@@ -87,7 +96,8 @@ TEST(parserTest, InexistingFile) {
 //return value of fsm() == 4 --> ERROR : EOF while reading a char
 TEST(parserTest, EOFWhileReadingCharMiddle) {
     testing::internal::CaptureStdout();
-    int error = fsm("../res/EOFWhileReadingChar.txt");
+    std::string path = "../res/EOFWhileReadingChar.txt";
+    int error = fsm(&path);
     std::cout << error;
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "4");
@@ -95,7 +105,8 @@ TEST(parserTest, EOFWhileReadingCharMiddle) {
 
 TEST(parserTest, EOFWhileReadingCharEnd) {
     testing::internal::CaptureStdout();
-    int error = fsm("../res/EOFWhileReadingCharEnd.txt");
+    std::string path = "../res/EOFWhileReadingCharEnd.txt";
+    int error = fsm(&path);
     std::cout << error;
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "4");
@@ -104,7 +115,8 @@ TEST(parserTest, EOFWhileReadingCharEnd) {
 //return value of fsm() == 5 --> ERROR : other char than '0' or '1' found while reading a char
 TEST(parserTest, CharAWhileReadingCharBegining) {
     testing::internal::CaptureStdout();
-    int error = fsm("../res/CharAWhileReadingCharBegining.txt");
+    std::string path = "../res/CharAWhileReadingCharBegining.txt";
+    int error = fsm(&path);
     std::cout << error;
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "5");
@@ -112,7 +124,8 @@ TEST(parserTest, CharAWhileReadingCharBegining) {
 
 TEST(parserTest, CharAWhileReadingCharMiddle) {
     testing::internal::CaptureStdout();
-    int error = fsm("../res/CharAWhileReadingCharMiddle.txt");
+    std::string path = "../res/CharAWhileReadingCharMiddle.txt";
+    int error = fsm(&path);
     std::cout << error;
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "5");
@@ -121,7 +134,8 @@ TEST(parserTest, CharAWhileReadingCharMiddle) {
 //return value of fsm() == 6 --> ERROR : other char than '0' just after reading a char
 TEST(parserTest, CharAWhileReadingCharEnd) {
     testing::internal::CaptureStdout();
-    int error = fsm("../res/CharAWhileReadingCharEnd.txt");
+    std::string path = "../res/CharAWhileReadingCharEnd.txt";
+    int error = fsm(&path);
     std::cout << error;
     std::string output = testing::internal::GetCapturedStdout();
     EXPECT_EQ(output, "a6");

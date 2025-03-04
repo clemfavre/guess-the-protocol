@@ -7,8 +7,9 @@ using namespace std;
 
 int main() {
     string path = "../res/bitstream.txt";
+    string* pathPtr = &path;
     cout << "program started" << endl;
-    int error = fsm(path);
+    int error = fsm(pathPtr);
     cout << "" << endl;
     if (error) {cout << "an error occured : ";
       cout << error;
