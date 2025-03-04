@@ -19,12 +19,14 @@ int fsm(std::string path) {
     while (file.get(bit)) {
       switch(state) {
         case State::waiting:
+
+          if (!(bit=='0' || bit=='1' || bit=='\n')) {
+            file.close(); return 1;
+          }
           if (bit == '0') {
               state = State::reading;
-            } else if (bit == '1') {
-              state = State::waiting;
             } else {
-              if (bit!='\n') {file.close(); return 1;}
+              state = State::waiting;
             }
           break;
         case State::reading:
