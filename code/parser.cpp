@@ -2,7 +2,6 @@
 #include <fstream>
 #include <iostream>
 #include "parser.h"
-using namespace std;
 
 enum State{
   waiting, reading
@@ -10,7 +9,7 @@ enum State{
 
 int fsm(std::string path) {
     //initialize the reader
-    ifstream file(path);
+    std::ifstream file(path);
     if (!file) {return 3;}
 
     State state = waiting;
@@ -38,7 +37,7 @@ int fsm(std::string path) {
           std::bitset<8> bits(binStr);
           unsigned char byte = bits.to_ulong();
           finalChar = static_cast<char>(byte);
-          cout << finalChar;
+          std::cout << finalChar;
           if (bit!='0') {file.close(); return 6;}
           state = waiting;
           break;
