@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-and-test:
-    runs-on: test-local-hosted-runner
+    runs-on: [test-local-hosted-runner, Linux]
 
     steps:
       # Check out the repository
