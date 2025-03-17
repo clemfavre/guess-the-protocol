@@ -10,7 +10,7 @@ on:
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu environment
+    runs-on: test-local-hosted-runner
 
     steps:
       # Check out the repository
